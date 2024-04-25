@@ -3,7 +3,7 @@ import {UIInstanceManager} from '../uimanager';
 import {Component, ComponentConfig} from './component';
 import {Timeout} from '../timeout';
 import { PlayerAPI } from 'bitmovin-player';
-
+import { PlayerEvent } from 'bitmovin-player/modules/bitmovinplayer-core.prod';
 /**
  * Configuration interface for the {@link BufferingOverlay} component.
  */
@@ -58,7 +58,7 @@ export class BufferingOverlay extends Container<BufferingOverlayConfig> {
       this.hide();
     };
 
-    player.on(player.exports.PlayerEvent.StallStarted, showOverlay);
+    player.on(PlayerEvent.StallStarted, showOverlay);
     player.on(player.exports.PlayerEvent.StallEnded, hideOverlay);
     player.on(player.exports.PlayerEvent.Play, showOverlay);
     player.on(player.exports.PlayerEvent.Playing, hideOverlay);

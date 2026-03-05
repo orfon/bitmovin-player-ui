@@ -331,6 +331,7 @@ export class UIManager {
 
     // Dynamically select a UI variant that matches the current UI condition.
     const resolveUiVariant = (event: PlayerEventBase) => {
+      console.log('resolve ui variant due to event', JSON.stringify(event));
       // Make sure that the AdStarted event data is persisted through ad playback in case other events happen
       // in the meantime, e.g. player resize. We need to store this data because there is no other way to find out
       // ad details while an ad is playing (in v8.0 at least; from v8.1 there will be ads.getActiveAd()).
@@ -407,6 +408,7 @@ export class UIManager {
              * Since this can break functionality of components that rely on this event, we relay the event to the
              * ads UI components with the following call.
              */
+            console.log('Relaying additional AdStarted event');
             this.currentUi.getWrappedPlayer().fireEventInUI(this.player.exports.PlayerEvent.AdStarted, adStartedEvent);
           }
         },
@@ -519,6 +521,7 @@ export class UIManager {
    *   is shown (if a switch is happening)
    */
   resolveUiVariant(context: Partial<UIConditionContext> = {}, onShow?: (context: UIConditionContext) => void): void {
+    console.log('effictive resolve ui variant with context', JSON.stringify(context));
     // Determine the current context for which the UI variant will be resolved
     const defaultContext: UIConditionContext = {
       isAd: false,
